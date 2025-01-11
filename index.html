@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2025 Preparation Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <div class="header-container">
+        <div class="timer-container">
+            <div id="timer" class="timer"></div>
+        </div>
+        <a href="https://fcldn.courses.store" class="logo-link">
+            <img src="https://competishun-test-id-password.netlify.app/logo.png" alt="Logo" class="logo">
+        </a>
+        <div class="hamburger" id="hamburger-1" title="Open Menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <div class="nav-container hidden" id="navContainer">
+            <a href="/">Home</a>
+            <a href="chapters.html">Chapters</a>
+            <a href="https://praveen-homework.netlify.app/" target="_blank">Homework</a>
+            <a href="smw.html">SMW</a>
+            <a href="score-tracker.html">Score Tracker</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="heading">JEE 2025 PREPARATION TRACKER</div>
+        <div class="quote">"Conquer Your Redemption Year"</div>
+        <div class="button-container" id="mainButtons">
+            <button class="button" id="praveenButton">PRAVEEN VI</button>
+            <button class="button" id="ontrakButton">ONTRAK</button>
+        </div>
+        <div class="button-container hidden" id="praveenButtons">
+            <button class="button" id="physicsNLButton">Physics NL</button>
+            <button class="button" id="chemistryNLButton">Chemistry NL</button>
+            <button class="button" id="mathsNLButton">Maths NL</button>
+            <a href="#" class="back-button" id="backButton1">Back</a>
+        </div>
+        <div class="button-container hidden" id="ontrakButtons">
+            <button class="button" id="physicsFlButton">Physics FL</button>
+            <button class="button" id="chemistryFLButton">Chemistry FL</button>
+            <button class="button" id="mathsFlButton">Maths FL</button>
+            <a href="#" class="back-button" id="backButton2">Back</a>
+        </div>
+        <div class="button-container hidden" id="chemistryNLButtons">
+            <button class="button" id="pcIocNlButton">PC/IOC NL</button>
+            <button class="button" id="ocNlButton">OC NL</button>
+            <a href="#" class="back-button" id="backButton4">Back</a>
+        </div>
+        <div class="button-container hidden" id="chemistryFLButtons">
+            <button class="button" id="pcIocFlButton">PC/IOC FL</button>
+            <button class="button" id="ocFlButton">OC FL</button>
+            <a href="#" class="back-button" id="backButton5">Back</a>
+        </div>
+        <div class="content hidden" id="physicsNLContent">
+            <div class="sub-header">
+                <h2 class="left">PHYSICS NL</h2>
+                <div class="progress-bar-container" id="physicsNlProgress">
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" id="physicsNlProgressFill"></div>
+                        <span id="physicsNlProgressText">Physics NL: 0% [Done: 0; Not Done: 225]</span>
+                    </div>
+                </div>
+                <div class="right">
+                    <button class="button3" id="saveButton">Save</button>
+                    <a href="#" class="back-button3" id="backButton3">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Rectilinear Motion</td>
+                            <td>
+                                <input type="checkbox">1<br>
+                                <input type="checkbox">2<br>
+                                <input type="checkbox">3<br>
+                                <input type="checkbox">4<br>
+                                <input type="checkbox">5<br>
+                            </td>
+                            <td>
+                                <input type="checkbox">1<br>
+                                <input type="checkbox">2<br>
+                                <input type="checkbox">3<br>
+                                <input type="checkbox">4<br>
+                                <input type="checkbox">5<br>
+                            </td>
+                            <td>
+                                Rev 1: <input type="date"><br>
+                                Rev 2: <input type="date"><br>
+                                Rev 3: <input type="date"><br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="chemistryNLContent">
+            <div class="sub-header">
+                <h2 class="left">PC/IOC NL</h2>
+                <div class="right">
+                    <button class="button3" id="saveChemistryNLButton">Save</button>
+                    <a href="#" class="back-button3" id="backButton6">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="chemistryNLTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="content hidden" id="mathsNLContent">
+            <div class="sub-header">
+                <h2 class="left">MATHS NL</h2>
+                <div class="right">
+                    <button class="button3" id="saveMathsButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonMathsNL">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mathsNLTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="content hidden" id="pcIocNlContent">
+            <div class="sub-header">
+                <h2 class="left">PC/IOC NL</h2>
+                <div class="right">
+                    <button class="button3" id="savePcIocNlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonPcIocNl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pcIocNlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        <div class="content hidden" id="ocNlContent">
+            <div class="sub-header">
+                <h2 class="left">OC NL</h2>
+                <div class="right">
+                    <button class="button3" id="saveOcNlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonOcNl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ocNlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="physicsFlContent">
+            <div class="sub-header">
+                <h2 class="left">PHYSICS FL</h2>
+                <div class="right">
+                    <button class="button3" id="savePhysicsFlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonPhysicsFl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="physicsFlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="pcIocFlContent">
+            <div class="sub-header">
+                <h2 class="left">PC/IOC FL</h2>
+                <div class="right">
+                    <button class="button3" id="savePcIocFlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonPcIocFl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pcIocFlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="ocFlContent">
+            <div class="sub-header">
+                <h2 class="left">OC FL</h2>
+                <div class="right">
+                    <button class="button3" id="saveOcFlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonOcFl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ocFlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="mathsFlContent">
+            <div class="sub-header">
+                <h2 class="left">Maths FL</h2>
+                <div class="right">
+                    <button class="button3" id="saveMathsFlButton">Save</button>
+                    <a href="#" class="back-button3" id="backButtonMathsFl">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Topic</th>
+                            <th>Lecture</th>
+                            <th>Homework</th>
+                            <th>Revision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mathsFlTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        Build by Pritam Saha
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2025 - Chapters</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <div class="header-container">
+        <div class="timer-container">
+            <div id="timer" class="timer"></div>
+        </div>
+        <a href="https://fcldn.courses.store" class="logo-link">
+            <img src="https://competishun-test-id-password.netlify.app/logo.png" alt="Logo" class="logo">
+        </a>
+        <div class="hamburger" id="hamburger-1" title="Open Menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <div class="nav-container hidden" id="navContainer">
+            <a href="/">Home</a>
+            <a href="chapters.html">Chapters</a>
+            <a href="https://praveen-homework.netlify.app/" target="_blank">Homework</a>
+            <a href="smw.html">SMW</a>
+            <a href="score-tracker.html">Score Tracker</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="heading">JEE SYLLABUS 2025</div>
+        <div class="dropdown-container">
+            <select id="subjectDropdown">
+                <option value="">Choose Option</option>
+                <option value="physics">JEE Physics</option>
+                <option value="chemistry">JEE Chemistry</option>
+                <option value="maths">JEE Maths</option>
+                <option value="progress">Pritam's Progress</option>
+            </select>
+            <button id="fetchButton" class="fetchButton">FETCH</button>
+        </div>
+        <div class="content hidden" id="syllabusContent">
+            <div class="sub-header">
+                <h2 class="left" id="subjectHeading"></h2>
+                <div class="right">
+                    <button class="button3" id="saveButton">Save</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="syllabusTable">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Chapter</th>
+                            <th>Done</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content hidden" id="progressContent" class="progressContent">
+            <h2 class="left">Pritam's Progress</h2>
+            <div class="progress-bar-container" style="margin-top: 20px;">
+                <div class="progress-bar" id="physicsProgress">
+                    <div class="progress-bar-fill"></div>
+                    <span>Physics: 0%</span>
+                </div>
+                <div class="progress-bar" id="chemistryProgress">
+                    <div class="progress-bar-fill"></div>
+                    <span>Chemistry: 0%</span>
+                </div>
+                <div class="progress-bar" id="mathsProgress">
+                    <div class="progress-bar-fill"></div>
+                    <span>Maths: 0%</span>
+                </div>
+                <div class="progress-bar" id="totalProgress">
+                    <div class="progress-bar-fill"></div>
+                    <span>PCM: 0%</span>
+                </div>
+            </div>
+            <div class="table-container2">
+                <table id="progressTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Chapter</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Fetching Data -->
+    <div id="fetchingModal" class="modal hidden">
+        <div class="modal-content">
+            <p>System is fetching the data...</p>
+        </div>
+    </div>
+    <footer class="footer">
+        Build by Pritam Saha
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+

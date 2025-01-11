@@ -1,0 +1,32 @@
+Kinematics
+Geometric Optics
+NLM
+Friction
+WPE
+Circular Motion
+COM
+RBD
+SHM
+Electrostatics
+Gravitation
+Current
+Heat
+Capacitance
+EMF
+EMI
+EMW
+AC
+Modern Physics
+Nuclear Physics
+Wave On String
+Sound Wave
+Wave Optics
+Thermodynamics
+Fluid Mechanics
+Calorimetry
+Elasticity
+Thermal Expansion
+Error
+Screw
+Semiconductor
+Communication System

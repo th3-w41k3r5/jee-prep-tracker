@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2025 - Score Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #E8F0FF;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent body scrolling */
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 100px;
+            padding: 20px;
+            max-height: 70vh;
+        }
+        .graph-container {
+            height: 80vh;
+            overflow-y: auto; /* Enable vertical scrolling within the graph container */
+        }
+        .graph {
+            width: 100%;
+            height: 400px; /* Adjust the height as needed */
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="timer-container">
+            <div id="timer" class="timer"></div>
+        </div>
+        <a href="https://fcldn.courses.store" class="logo-link">
+            <img src="https://competishun-test-id-password.netlify.app/logo.png" alt="Logo" class="logo">
+        </a>
+        <div class="hamburger" id="hamburger-1" title="Open Menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <div class="nav-container hidden" id="navContainer">
+            <a href="/">Home</a>
+            <a href="chapters.html">Chapters</a>
+            <a href="https://praveen-homework.netlify.app/" target="_blank">Homework</a>
+            <a href="smw.html">SMW</a>
+            <a href="score-tracker.html">Score Tracker</a>
+        </div>
+    </div>
+    <div class="container" id="scoreTrackerContainer">
+        <div class="heading">JEE 2025 PREPARATION TRACKER</div>
+        <div class="sub-header">
+            <h2 class="left">SCORE TRACKER</h2>
+            <div class="right">
+                <a href="#" class="back-button3" id="viewGraphButton">View Graph</a>
+                <button class="button3" id="saveButton">Save</button>
+            </div>
+        </div>
+        <div class="table-container" id="scoreTableContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sl No.</th>
+                        <th>Test Name</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Incorrect</th>
+                        <th>Correct</th>
+                        <th>Analysed?</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="scoreTableBody">
+                    <!-- Rows will be added dynamically here -->
+                </tbody>
+            </table>
+        </div>
+        <button class="button" id="addTestDataButton">Add New Test Data</button>
+    </div>
+
+    <div class="container hidden" id="graphContainer">
+        <div class="right">
+            <button class="button3" id="printButton">Print</button>
+            <a href="#" class="back-button3" id="backButton">Back</a>
+        </div>
+        <div class="graph-container">
+            <canvas id="graph1" class="graph"></canvas>
+            <canvas id="graph2" class="graph"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addTestDataButton = document.getElementById('addTestDataButton');
+            const scoreTableBody = document.getElementById('scoreTableBody');
+            const saveButton = document.getElementById('saveButton');
+            const viewGraphButton = document.getElementById('viewGraphButton');
+            const backButton = document.getElementById('backButton');
+            const printButton = document.getElementById('printButton');
+            const scoreTrackerContainer = document.getElementById('scoreTrackerContainer');
+            const graphContainer = document.getElementById('graphContainer');
+            const graph1 = document.getElementById('graph1').getContext('2d');
+            const graph2 = document.getElementById('graph2').getContext('2d');
+
+            let testCount = scoreTableBody.children.length;
+
+            function getDataFromTable() {
+                const rows = scoreTableBody.querySelectorAll('tr');
+                return Array.from(rows).map(row => {
+                    return {
+                        testName: row.children[1].textContent.trim(),
+                        date: row.children[2].children[0].value,
+                        score: parseFloat(row.children[3].textContent),
+                        incorrect: parseFloat(row.children[4].textContent),
+                        correct: parseFloat(row.children[5].textContent),
+                        analysed: row.children[6].children[0].checked
+                    };
+                });
+            }
+
+            function generateGraphs() {
+                const data = getDataFromTable();
+
+                const labels = data.map(item => item.date);
+                const scores = data.map(item => item.score);
+                const accuracies = data.map(item => {
+                    const total = item.correct + item.incorrect;
+                    return total > 0 ? (item.correct / total) * 100 : 0;
+                });
+
+                new Chart(graph1, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Scores',
+                            data: scores,
+                            borderColor: 'blue',
+                            borderWidth: 1
+                        }]
+                    }
+                });
+
+                new Chart(graph2, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Accuracy (%)',
+                            data: accuracies,
+                            borderColor: 'green',
+                            borderWidth: 1
+                        }]
+                    }
+                });
+            }
+
+            addTestDataButton.addEventListener('click', () => {
+                testCount++;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${testCount}</td>
+                    <td contenteditable="true"></td>
+                    <td><input type="date"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td><input type="checkbox"></td>
+                    <td><button class="deleteButton">Delete</button></td>
+                `;
+                scoreTableBody.appendChild(row);
+                addDeleteFunctionality(row.querySelector('.deleteButton'));
+            });
+
+            saveButton.addEventListener('click', () => {
+                if (!validateInputs()) return;
+                const data = getDataFromTable();
+                localStorage.setItem('scoreData', JSON.stringify(data));
+                alert('Data saved successfully!');
+            });
+
+            viewGraphButton.addEventListener('click', () => {
+                scoreTrackerContainer.classList.add('hidden');
+                graphContainer.classList.remove('hidden');
+                generateGraphs();
+            });
+
+            backButton.addEventListener('click', () => {
+                graphContainer.classList.add('hidden');
+                scoreTrackerContainer.classList.remove('hidden');
+            });
+
+            printButton.addEventListener('click', () => {
+                window.print();
+            });
+
+            function loadSavedData() {
+                const data = JSON.parse(localStorage.getItem('scoreData')) || [];
+                testCount = data.length;
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td contenteditable="true">${item.testName}</td>
+                        <td><input type="date" value="${item.date}"></td>
+                        <td contenteditable="true">${item.score}</td>
+                        <td contenteditable="true">${item.incorrect}</td>
+                        <td contenteditable="true">${item.correct}</td>
+                        <td><input type="checkbox" ${item.analysed ? 'checked' : ''}></td>
+                        <td><button class="deleteButton">Delete</button></td>
+                    `;
+                    scoreTableBody.appendChild(row);
+                    addDeleteFunctionality(row.querySelector('.deleteButton'));
+                });
+            }
+
+            function addDeleteFunctionality(deleteButton) {
+                deleteButton.addEventListener('click', () => {
+                    const row = deleteButton.closest('tr');
+                    row.remove();
+                    updateRowNumbers();
+                });
+            }
+
+            function updateRowNumbers() {
+                const rows = scoreTableBody.querySelectorAll('tr');
+                rows.forEach((row, index) => {
+                    row.children[0].textContent = index + 1;
+                });
+                testCount = rows.length;
+            }
+
+            function validateInputs() {
+                const rows = scoreTableBody.querySelectorAll('tr');
+                for (const row of rows) {
+                    const testName = row.children[1].textContent.trim();
+                    const date = row.children[2].children[0].value.trim();
+                    const score = row.children[3].textContent.trim();
+                    const incorrect = row.children[4].textContent.trim();
+                    const correct = row.children[5].textContent.trim();
+
+                    if (!testName || !date || !score || !incorrect || !correct) {
+                        alert('Please fill in all fields.');
+                        return false;
+                    }
+
+                    if (isNaN(score) || isNaN(incorrect) || isNaN(correct)) {
+                        alert('Score, Incorrect, and Correct must be numbers.');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            loadSavedData();
+
+            // Countdown Timer
+            const targetDate = new Date('2025-01-05T00:00:00');
+            const timerElement = document.getElementById('timer');
+
+            function updateTimer() {
+                const currentDate = new Date();
+                const timeDifference = targetDate - currentDate;
+
+                const totalDaysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+                const monthsLeft = Math.floor(totalDaysLeft / 30); // Approximate months
+                const daysLeft = totalDaysLeft % 30;
+
+                timerElement.innerHTML = `${monthsLeft} MONTHS ${daysLeft} DAYS LEFT FOR JEE MAINS 2025`;
+            }
+
+            setInterval(updateTimer, 1000); // Update the timer every second
+            updateTimer(); // Initial call to display the timer immediately
+
+            // Hamburger Menu
+            const hamburger = document.getElementById('hamburger-1');
+            const navContainer = document.getElementById('navContainer');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('is-active');
+                navContainer.classList.toggle('hidden');
+                hamburger.title = hamburger.classList.contains('is-active') ? 'Close Menu' : 'Open Menu';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!navContainer.contains(event.target) && !hamburger.contains(event.target)) {
+                    navContainer.classList.add('hidden');
+                    hamburger.classList.remove('is-active');
+                }
+            });
+        });
+    </script>
+    <footer class="footer">
+        Build by Pritam Saha
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

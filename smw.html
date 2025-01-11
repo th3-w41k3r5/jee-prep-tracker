@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2025 - SMW</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        .table-container {
+            overflow-y: auto;
+            max-height: 300px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            position: relative;
+            width: 33.33%;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Button styles */
+        .button-container .button, .button-container .back-button {
+            background-color: #1DA1F2;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 1em;
+            margin: 10px auto;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 200px;
+        }
+
+        .button-container .button:hover, .button-container .back-button:hover {
+            background-color: #0d8dcf;
+        }
+
+        .button-container .back-button {
+            background-color: #f4f4f4;
+            border: 2px solid #1DA1F2;
+            color: #1DA1F2;
+        }
+        .button-container .back-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .add-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #1DA1F2;
+            margin-left: 5px;
+        }
+
+        .add-button:hover {
+            color: #0d8dcf;
+        }
+
+        /* Dropdown for chapters */
+        #chapterDropdownContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #chapterDropdown {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+
+        .close-dropdown {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: red;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            cursor: pointer;
+        }
+
+        /* Delete cross */
+        .delete-cross {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: red;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: none;
+        }
+
+        td:hover .delete-cross {
+            display: inline;
+        }
+
+        .chapter-cell:hover .delete-cross {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="timer-container">
+            <div id="timer" class="timer"></div>
+        </div>
+        <a href="https://fcldn.courses.store" class="logo-link">
+            <img src="https://competishun-test-id-password.netlify.app/logo.png" alt="Logo" class="logo">
+        </a>
+        <div class="hamburger" id="hamburger-1" title="Open Menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <div class="nav-container hidden" id="navContainer">
+            <a href="/">Home</a>
+            <a href="chapters.html">Chapters</a>
+            <a href="https://praveen-homework.netlify.app/" target="_blank">Homework</a>
+            <a href="smw.html">SMW</a>
+            <a href="score-tracker.html">Score Tracker</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="heading">STRONG, MEDIUM, WEAK (SMW)</div>
+        <div class="button-container" id="smwButtons">
+            <button class="button" id="physicsSmwButton">Physics SMW</button>
+            <button class="button" id="chemistrySmwButton">Chemistry SMW</button>
+            <button class="button" id="mathsSmwButton">Maths SMW</button>
+        </div>
+
+        <!-- Chemistry SMW Buttons -->
+        <div class="button-container hidden" id="chemistrySmwButtons">
+            <button class="button" id="pciocSmwButton">PC/IOC SMW</button>
+            <button class="button" id="ocSmwButton">OC SMW</button>
+            <button class="button back-button" id="backChemistryButton">Back</button>
+        </div>
+
+        <!-- Physics SMW Content -->
+        <div class="content hidden" id="physicsSmwContent">
+            <div class="sub-header">
+                <h2 class="left">PHYSICS SMW</h2>
+                <div class="right">
+                    <button class="button3" id="savePhysicsSmwButton">Save</button>
+                    <a href="#" class="back-button3" id="backPhysicsButton">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STRONG <button class="add-button" id="addStrongPhysics"><span class="plus-icon">+</span></button></th>
+                            <th>MEDIUM <button class="add-button" id="addMediumPhysics"><span class="plus-icon">+</span></button></th>
+                            <th>WEAK <button class="add-button" id="addWeakPhysics"><span class="plus-icon">+</span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="physicsSmwTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Maths SMW Content -->
+        <div class="content hidden" id="mathsSmwContent">
+            <div class="sub-header">
+                <h2 class="left">MATHS SMW</h2>
+                <div class="right">
+                    <button class="button3" id="saveMathsSmwButton">Save</button>
+                    <a href="#" class="back-button3" id="backMathsButton">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STRONG <button class="add-button" id="addStrongMaths"><span class="plus-icon">+</span></button></th>
+                            <th>MEDIUM <button class="add-button" id="addMediumMaths"><span class="plus-icon">+</span></button></th>
+                            <th>WEAK <button class="add-button" id="addWeakMaths"><span class="plus-icon">+</span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="mathsSmwTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PC/IOC SMW Content -->
+        <div class="content hidden" id="pciocSmwContent">
+            <div class="sub-header">
+                <h2 class="left">PC/IOC SMW</h2>
+                <div class="right">
+                    <button class="button3" id="savePciocSmwButton">Save</button>
+                    <a href="#" class="back-button3" id="backPciocButton">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STRONG <button class="add-button" id="addStrongPcioc"><span class="plus-icon">+</span></button></th>
+                            <th>MEDIUM <button class="add-button" id="addMediumPcioc"><span class="plus-icon">+</span></button></th>
+                            <th>WEAK <button class="add-button" id="addWeakPcioc"><span class="plus-icon">+</span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pciocSmwTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- OC SMW Content -->
+        <div class="content hidden" id="ocSmwContent">
+            <div class="sub-header">
+                <h2 class="left">OC SMW</h2>
+                <div class="right">
+                    <button class="button3" id="saveOcSmwButton">Save</button>
+                    <a href="#" class="back-button3" id="backOcButton">Back</a>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STRONG <button class="add-button" id="addStrongOc"><span class="plus-icon">+</span></button></th>
+                            <th>MEDIUM <button class="add-button" id="addMediumOc"><span class="plus-icon">+</span></button></th>
+                            <th>WEAK <button class="add-button" id="addWeakOc"><span class="plus-icon">+</span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="ocSmwTableBody">
+                        <!-- Rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dropdown for selecting chapters -->
+    <div id="chapterDropdownContainer" class="hidden">
+        <button class="close-dropdown" id="closeDropdownButton">&times;</button>
+        <select id="chapterDropdown" multiple>
+            <!-- Options will be dynamically added here -->
+        </select>
+        <button class="button" id="addSelectedChaptersButton">Add Selected Chapters</button>
+    </div>
+    <script src="script.js"></script>
+    <footer class="footer">
+        Build by Pritam Saha
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
