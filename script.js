@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const targetDate = new Date('2025-01-05T00:00:00');
+    const targetDate = new Date('2025-01-28T00:00:00');
     const timerElement = document.getElementById('timer');
 
     function updateTimer() {
